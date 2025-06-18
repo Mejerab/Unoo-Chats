@@ -5,8 +5,8 @@ import { useNavigate } from "react-router";
 
 const axiosSecure = axios.create({
     baseURL: 
-    // 'https://unoo-chats-server.onrender.com'
-    'http://localhost:5000'
+    'https://unoo-chats-server.onrender.com'
+    // 'http://localhost:5000'
     ,
     withCredentials: true
 })
