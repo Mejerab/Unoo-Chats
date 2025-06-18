@@ -35,7 +35,7 @@ const Dashboard = () => {
                             tabIndex={0}
                             className="menu menu-sm dropdown-content z-50 bg-[#00000099] border border-[#8b5cf6] rounded-box relative mt-3 w-48 p-2 shadow">
                             <Drawer open={open} onClose={toggleDrawer(false)}>
-                                <div className="w-[300px] bg-transparent text-white flex flex-col justify-center items-center h-full font-medium">
+                                <div className="w-[300px] !bg-slate-900 text-white flex flex-col justify-center items-center h-full font-medium">
                                     <Link to='/profile' className="relative group cursor-pointer">
                                         <img src={getUser?.photo} className="rounded-full w-40 h-40 object-cover border-4 border-[#8b5cf6]" alt="" />
                                         <IoPencil className="text-[35px] opacity-0 invisible group-hover:opacity-100 group-hover:visible tra absolute -top-1 right-0 bg-white p-2 rounded-full text-[#8b5cf6]" />

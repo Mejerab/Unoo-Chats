@@ -6,6 +6,7 @@ import Inbox from "../pages/Dashboard/Inbox";
 import Profile from "../pages/Profile";
 import Home from "../pages/Home/Home";
 import { Modal } from "@mui/material";
+import PrivateRoutes from "./PrivateRoutes";
 
 const router = createBrowserRouter([
     {
@@ -22,25 +23,21 @@ const router = createBrowserRouter([
             },
             {
                 path: '/profile',
-                element: <Profile />,
+                element: <PrivateRoutes><Profile /></PrivateRoutes>,
             },
         ],
     },
     {
         path: '/chats',
-        element: <Dashboard />,
+        element: <PrivateRoutes><Dashboard /></PrivateRoutes>,
         children: [
             {
                 path: 'e/unoo',
-                element: <Inbox />
+                element: <PrivateRoutes><Inbox /></PrivateRoutes>
             },
             {
                 path: 'e/:uid',
-                element: <Inbox />
-            },
-            {
-                path: '/chats/image/:link',
-                element: <Modal />
+                element: <PrivateRoutes><Inbox /></PrivateRoutes>
             }
         ]
     }

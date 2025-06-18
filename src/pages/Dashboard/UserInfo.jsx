@@ -1,18 +1,19 @@
 import { useQuery } from "@tanstack/react-query";
 import { useContext } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
-import useAxiosPublic from "../../hooks/useAxiosPublic";
 import Tippy from "@tippyjs/react";
 import 'tippy.js/dist/tippy.css';
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const UserInfo = ({ uid }) => {
-    const { loading } = useContext(AuthContext);
-    const axiosPublic = useAxiosPublic();
+    const { loading, user } = useContext(AuthContext);
+    const axiosSecure = useAxiosSecure();
+    
     const { data: info } = useQuery({
         queryKey: ['user', uid],
         enabled: !loading && !!uid,
         queryFn: async () => {
-            const res = await axiosPublic.get(`/users/uid/${uid}`);
+            const res = await axiosSecure.get(`/users/uid/${uid}?email=${user.email}`);
             return res.data;
         }
 

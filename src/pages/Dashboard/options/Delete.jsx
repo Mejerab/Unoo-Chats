@@ -14,10 +14,9 @@ const Delete = ({chat, user}) => {
             data.image = null;
         }
         const res = await axiosSecure.patch(`/chats/delete/${chat.chat_id}?email=${user?.email}`, data);
-        console.log(res.data);
     }
     return (
-        <div>
+        <div id={`delete_${chat.chat_id}`}>
             <button onClick={()=>{handleDelete(chat);}} className="cursor-pointer p-1.5 rounded-full bg-[#8b5cf6] text-slate-900 hover:bg-slate-900 hover:text-[#8b5cf6] transition-colors"><MdDelete /></button>
         </div>
     );

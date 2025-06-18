@@ -15,7 +15,6 @@ const Edit = ({ chat, user }) => {
         chat.edited = true;
         const {_id, ...edit} = chat;
         const res = await axiosSecure.patch(`/chats/edit/${chat.chat_id}?email=${user?.email}`, edit);
-        console.log(res.data);
         setIsOpen(false);
     }
     window.addEventListener('keydown', (e) => {
@@ -24,7 +23,7 @@ const Edit = ({ chat, user }) => {
         }
     })
     return (
-        <div>
+        <div id={`edit_${chat.chat_id}`}>
             <button onClick={() => setIsOpen(true)} className="cursor-pointer p-1.5 rounded-full bg-[#8b5cf6] text-slate-900 hover:bg-slate-900 hover:text-[#8b5cf6] transition-colors"><MdModeEditOutline /></button>
             <Dialog open={isOpen} as="div" className="relative z-[100] focus:outline-none" onClose={close}>
                 <div className="fixed inset-0 z-10 w-screen overflow-y-auto">

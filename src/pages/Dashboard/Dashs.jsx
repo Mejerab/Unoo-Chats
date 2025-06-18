@@ -6,16 +6,18 @@ import { NavLink } from "react-router";
 import "tippy.js/dist/tippy.css";
 import UseSocket from "../../hooks/userSocket";
 import moment from "moment";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const Dashs = () => {
     const axiosPublic = useAxiosPublic();
+    const axiosSecure = useAxiosSecure();
     const socket = UseSocket();
     const { user, loading } = useContext(AuthContext);
     const { data: users, isLoading } = useQuery({
         queryKey: ['users'],
         enabled: !loading,
         queryFn: async () => {
-            const res = await axiosPublic.get('/users');
+            const res = await axiosSecure.get(`/users?email=${user.email}`);
             return res.data;
         }
     })
@@ -80,7 +82,6 @@ const Dashs = () => {
             }
             <button onClick={async () => {
                 const re = await axiosPublic.delete('/chats');
-                console.log(re.data);
             }}>Delete</button>
         </div>
     );

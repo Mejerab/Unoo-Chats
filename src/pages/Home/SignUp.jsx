@@ -20,6 +20,7 @@ const SignUp = () => {
         handleSubmit,
     } = useForm();
     const handleCreate = async (data) => {
+        setLoadi(true);
         if (data.photo[0].type === 'image/jpeg' || data.photo[0].type === 'image/png' || data.photo[0].type === 'image/jpg') {
             const imageData = { image: data.photo[0] };
             const imageRes = await axiosPublic.post(hostingURL, imageData, {
@@ -90,6 +91,7 @@ const SignUp = () => {
                 confirmButtonText: 'Continue'
             })
         }
+        setLoadi(false);
     }
     const handleGoogleLogin = () => {
         googleLogin()
@@ -105,7 +107,6 @@ const SignUp = () => {
                             uid: result.user.uid
                         }
                         const postRes = await axiosPublic.post('/users', userInfo);
-                        console.log(postRes.data);
                         Swal.fire({
                             title: 'Success',
                             text: 'You successfully Logged in to your account in Unoo Chats.',
@@ -170,7 +171,7 @@ const SignUp = () => {
                     <div className="tooltip w-full" disabled data-tip="You are already logged in !">
                         <button disabled className="btn overflow-hidden !bg-gray-400 hover:text-white text-black rounded-full h-[50px] w-full"><span className="z-20">Sign Up</span></button>
                     </div> : loadi ? <button disabled className="btn overflow-hidden button relative hover:text-white text-black rounded-full h-[50px] w-full !bg-white"><span className="z-20 loading loading-spinner text-[#8b5cf6] loading-xl"></span></button> :
-                        <button onClick={() => setLoadi(true)} className="btn overflow-hidden button relative hover:text-white text-black rounded-full h-[50px] w-full"><span className="z-20">Sign Up</span></button>
+                        <button className="btn overflow-hidden button relative hover:text-white text-black rounded-full h-[50px] w-full"><span className="z-20">Sign Up</span></button>
                 }
             </form>
             <p className='text-sm '>Do you <Link to='?login' className='underline cursor-pointer'>Already have an account</Link> ?</p>

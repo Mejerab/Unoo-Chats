@@ -1,14 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
-import useAxiosPublic from "./useAxiosPublic";
 import { useContext, useEffect } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import { useLocation } from "react-router";
+import useAxiosSecure from "./useAxiosSecure";
 
 const useFindUser = (id) => {
     const location = useLocation();
-    const axiosPublic = useAxiosPublic();
-    const { loading } = useContext(AuthContext);
-    const { data: user, refetch } = useQuery({
+    const axiosSecure = useAxiosSecure();
+    const { loading, user } = useContext(AuthContext);
+    const { data: singleUser, refetch } = useQuery({
         queryKey: ['singleUser'],
         enabled: !loading,
         queryFn: async () => {
@@ -16,7 +16,7 @@ const useFindUser = (id) => {
                 return { name: 'Unoo', photo: 'https://i.ibb.co/1JtW839p/eid5.jpg', uid: '23423423423' };
             }
             else {
-                const res = await axiosPublic.get(`/users/uid/${id}`);
+                const res = await axiosSecure.get(`/users/uid/${id}?email=${user.email}`);
                 return res.data;
             }
         }
@@ -24,7 +24,7 @@ const useFindUser = (id) => {
     useEffect(() => {
         refetch()
     }, [refetch, location.pathname])
-    return user;
+    return singleUser;
 };
 
 export default useFindUser;

@@ -54,3 +54,6 @@
 #footer canvas{
     height: 300px !important;
 }
+.MuiPaper-root .MuiPaper-elevation .MuiPaper-elevation16 .MuiDrawer-paper .MuiDrawer-paperAnchorLeft .css-1krrxmk{
+    background-color: transparent !important;
+}

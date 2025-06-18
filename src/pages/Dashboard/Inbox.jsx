@@ -51,12 +51,16 @@ const Inbox = () => {
         socket.on('chatDelete', (data) => {
             if (data.image === null) {
                 const image = document.getElementById(`image_${data.chat_id}`);
-                image.innerHTML = `<p className='text-gray-300 font-semibold italic p-6'>Chat deleted by user</p>`
+                image.innerHTML = `<p className='text-gray-300 font-semibold italic p-6'>Chat deleted by user</p>`;
             }
             if (data.text === '') {
                 const msg = document.getElementById(data.chat_id);
+                const editButton = document.getElementById(`edit_${data.chat_id}`);
+                const deleteButton = document.getElementById(`delete_${data.chat_id}`);
                 msg.innerText = 'Chat deleted by user';
                 msg.classList = `text-gray-300 font-semibold italic p-3`;
+                editButton.classList = 'hidden';
+                deleteButton.classList = 'hidden';
             }
         })
         return () => {
@@ -131,7 +135,6 @@ const Inbox = () => {
                 setMessages((prev) => [...prev, msg]);
             }
             else if (msg.source === [path, user?.uid].sort().join('_')) {
-                console.log(path, user?.uid);
                 setMessages((prev) => [...prev, msg])
             }
         })
