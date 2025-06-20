@@ -100,7 +100,7 @@ const Profile = () => {
                 <h5 className="text-center mt-6 font-medium text-3xl">Profile Information</h5>
                 <div className="flex items-center gap-5">
                     <input {...register('name')} defaultValue={getUser?.name} type="text" className="input border border-[#8b5cf6] text bg-transparent w-full" placeholder="Name" />
-                    <input defaultValue={user.email} disabled type="text" className="disabled:bg-transparent disabled:text-[#676767] disabled:border-[#8b5cf6] input border border-[#8b5cf6] text bg-transparent w-full" placeholder="email" />
+                    <input defaultValue={user.email} disabled type="text" className="disabled:bg-transparent text-[#676767] disabled:!text-[#676767] disabled:border-[#8b5cf6] input border border-[#8b5cf6] text bg-transparent w-full" placeholder="email" />
                 </div>
                 <div className="flex justify-center items-center">
                     <input {...register('photo')} id="imageInput" type="file" className="hidden" />

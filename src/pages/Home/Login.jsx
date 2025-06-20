@@ -56,7 +56,8 @@ const Login = () => {
             .then(async (result) => {
                 try {
                     const email = result.user.email;
-                    const findRes = await axiosSecure.get(`/users/${email}`);
+                    const findRes = await axiosPublic.get(`/users/${email}`);
+                    console.log(findRes);
                     if (findRes.data === '') {
                         const userInfo = {
                             name: result.user.displayName,
@@ -65,19 +66,21 @@ const Login = () => {
                             uid: result.user.uid
                         }
                         const postRes = await axiosPublic.post('/users', userInfo);
-                        Swal.fire({
-                            title: 'Success',
-                            text: 'You successfully Logged in to your account in Unoo Chats.',
-                            icon: 'success',
-                            background: 'rgba(15, 23, 43, 0.8)',
-                            color: '#ffffff',
-                            customClass: {
-                                confirmButton: 'swalButton',
-                                icon: 'icoon'
-                            },
-                            confirmButtonText: 'Continue'
-                        })
-                        return navigate('/chats');
+                        if (postRes.data.insertedId) {
+                            Swal.fire({
+                                title: 'Success',
+                                text: 'You successfully Logged in to your account in Unoo Chats.',
+                                icon: 'success',
+                                background: 'rgba(15, 23, 43, 0.8)',
+                                color: '#ffffff',
+                                customClass: {
+                                    confirmButton: 'swalButton',
+                                    icon: 'icoon'
+                                },
+                                confirmButtonText: 'Continue'
+                            })
+                            return navigate('/chats');
+                        }
                     }
                     else {
                         Swal.fire({

@@ -6,7 +6,7 @@ const UseSocket = () => {
     const { user } = useContext(AuthContext);
     const socket = io(
         'https://unoo-chats-server.onrender.com'
-        // 'http://localhost:5000'
+        //'http://localhost:5000'
         , {
         query: { uid: user?.uid },
          transportOptions: { polling: { withCredentials: true } }

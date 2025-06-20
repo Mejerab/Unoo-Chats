@@ -32,20 +32,24 @@ const AuthProvider = ({ children }) => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
             console.log('User onlione');
             setUser(currentUser);
-            setLoading(false);
             if (currentUser) {
                 axiosPublic.post('/jwt', { email: currentUser?.email })
-                    .then(() => console.log('Token'))
+                    .then(() => {
+                        console.log('Token')
+                        setLoading(false);
+                    })
             }
             else {
                 axiosPublic.post(`/logout`, { email: currentUser?.email })
-                    .then(res => console.log(res.data, 'logged out'))
+                .then(res => {console.log(res.data, 'logged out')
+                    setLoading(false);
+                    })
             }
         })
         return () => {
             unsubscribe();
         }
-    }, [])
+    }, [axiosPublic])
     const update = (name, photo) => {
         setLoading(true);
         return updateProfile(auth.currentUser, {

@@ -1,8 +1,7 @@
-import { useContext, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import ParticleRing from "../hooks/AnimationHook";
 import { gsap } from "gsap";
 import { useLocation, useNavigate } from 'react-router';
-import { AuthContext } from "../Provider/AuthProvider";
 import Login from "./Home/Login";
 import SignUp from "./Home/SignUp";
 
@@ -11,7 +10,6 @@ const LettingIn = () => {
     const location = useLocation();
     const slideRef = useRef(null);
     const rightRef = useRef(null);
-    const { loading } = useContext(AuthContext);
     useEffect(() => {
         gsap.fromTo(slideRef.current, {
             x: -600,
@@ -43,11 +41,6 @@ const LettingIn = () => {
             }
         }
     }, [location.search, navigate])
-    useEffect(() => {
-        if (loading) {
-            <div className="flex justify-center items-center w-full min-h-screen"><span className="loading loading-spinner text-[#8b5cf6] loading-xl"></span></div>
-        }
-    }, [loading])
 
 
     return (

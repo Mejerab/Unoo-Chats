@@ -7,10 +7,12 @@ import useHostingUrl from "../../hooks/useHostingUrl";
 import { useForm } from "react-hook-form";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const SignUp = () => {
     const navigate = useNavigate();
     const axiosPublic = useAxiosPublic();
+    const axiosSecure = useAxiosSecure();
     const hostingURL = useHostingUrl();
     const { user, createUser, update, googleLogin } = useContext(AuthContext);
     const [show, setShow] = useState(false);
@@ -107,19 +109,21 @@ const SignUp = () => {
                             uid: result.user.uid
                         }
                         const postRes = await axiosPublic.post('/users', userInfo);
-                        Swal.fire({
-                            title: 'Success',
-                            text: 'You successfully Logged in to your account in Unoo Chats.',
-                            icon: 'success',
-                            background: 'rgba(15, 23, 43, 0.8)',
-                            color: '#ffffff',
-                            customClass: {
-                                confirmButton: 'swalButton',
-                                icon: 'icoon'
-                            },
-                            confirmButtonText: 'Continue'
-                        })
-                        return navigate('/chats');
+                        if (postRes.data.insertedId) {
+                            Swal.fire({
+                                title: 'Success',
+                                text: 'You successfully Logged in to your account in Unoo Chats.',
+                                icon: 'success',
+                                background: 'rgba(15, 23, 43, 0.8)',
+                                color: '#ffffff',
+                                customClass: {
+                                    confirmButton: 'swalButton',
+                                    icon: 'icoon'
+                                },
+                                confirmButtonText: 'Continue'
+                            })
+                            return navigate('/chats');
+                        }
                     }
                     else {
                         Swal.fire({
