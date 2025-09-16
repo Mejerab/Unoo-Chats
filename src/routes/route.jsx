@@ -7,11 +7,13 @@ import Profile from "../pages/Profile";
 import Home from "../pages/Home/Home";
 import { Modal } from "@mui/material";
 import PrivateRoutes from "./PrivateRoutes";
+import ErrorPage from "../error/ErrorPage";
 
 const router = createBrowserRouter([
     {
         path: "/",
         element: <Layout />,
+        errorElement: <ErrorPage />,
         children: [
             {
                 path: '/',
